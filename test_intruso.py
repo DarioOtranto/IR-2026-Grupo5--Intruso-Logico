@@ -13,7 +13,6 @@ import numpy as np
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 
-# ========== CONFIGURACIÓN ==========
 ASSETS_PATH = os.path.join(os.path.dirname(__file__), "assets")
 RESULTS_PATH = os.path.join(os.path.dirname(__file__), "results")
 os.makedirs(ASSETS_PATH, exist_ok=True)
@@ -21,7 +20,6 @@ os.makedirs(RESULTS_PATH, exist_ok=True)
 
 IMAGE_SIZE = (300, 300)
 
-# ========== 20 SERIES (INTRUSO LÓGICO) ==========
 ITEMS = [
     {"categoria": "Animales", "opciones": ["perro", "gato", "mesa", "pájaro"], "intruso": "mesa"},
     {"categoria": "Frutas", "opciones": ["manzana", "banana", "auto", "naranja"], "intruso": "auto"},
@@ -145,10 +143,10 @@ class IntrusoTest:
                 btn = tk.Button(parent, text="?", command=lambda: self.answer(is_intruso),
                                 font=("Roboto", 28), bg="white", fg="black",
                                 width=15, height=8, relief=tk.RAISED, bd=3, cursor="hand2")
-        else:
+        else:  # solo_texto
             btn = tk.Button(parent, text=word.upper(), command=lambda: self.answer(is_intruso),
-                            font=("Roboto", 24, "bold"), bg="white", fg="black",
-                            width=20, height=10, relief=tk.RAISED, bd=3, cursor="hand2")
+                            font=("Roboto", 50, "bold"), bg="white", fg="black",
+                            width=30, height=12, relief=tk.RAISED, bd=8, cursor="hand2")
         return btn
 
     def show_item(self):
@@ -172,7 +170,7 @@ class IntrusoTest:
                  font=("Roboto", 16), bg="#F5F5F5", fg="#757575").pack(side=tk.LEFT, padx=30)
 
         instr = tk.Label(self.root, text="¿Cuál de estas imágenes NO pertenece al grupo?",
-                         font=("Roboto", 28, "bold"), bg="#F5F5F5", fg="#212121")
+                         font=("Roboto", 32, "bold"), bg="#F5F5F5", fg="#212121")
         instr.pack(pady=30)
 
         frame_opts = tk.Frame(self.root, bg="#F5F5F5")
@@ -225,11 +223,9 @@ class IntrusoTest:
         self.current_idx += 1
         self.show_item()
 
-    # ========== VENTANA DE RESULTADOS CORREGIDA (centrada, sin maximizar) ==========
     def show_results_window(self, tiempos, aciertos, total, precision, z_aciertos, interpretacion):
         results_win = tk.Toplevel(self.root)
         results_win.title("Resultados del Test")
-        # Tamaño fijo y centrado
         ancho = 1000
         alto = 800
         screen_width = results_win.winfo_screenwidth()
@@ -240,10 +236,8 @@ class IntrusoTest:
         results_win.configure(bg="#F5F5F5")
         results_win.transient(self.root)
         results_win.grab_set()
-        # Permitir redimensionamiento manual
         results_win.minsize(800, 600)
 
-        # Notebook principal
         notebook = ttk.Notebook(results_win)
         notebook.pack(fill='both', expand=True, padx=10, pady=10)
 
@@ -255,15 +249,15 @@ class IntrusoTest:
         notebook.add(tab_roc, text='Curva ROC')
         self._create_roc_tab(tab_roc)
 
-        # Botón de cierre al final
         btn_frame = tk.Frame(results_win, bg="#F5F5F5")
         btn_frame.pack(pady=15)
+
         def on_close():
             results_win.destroy()
-            self.root.quit()
             self.root.destroy()
             sys.exit(0)
 
+        results_win.protocol("WM_DELETE_WINDOW", on_close)
         btn_ok = tk.Button(btn_frame, text="Cerrar y salir", command=on_close,
                            font=("Roboto", 14), bg="#6200EE", fg="white",
                            relief=tk.RAISED, bd=2, padx=30, pady=10)
@@ -398,7 +392,6 @@ class IntrusoTest:
             }
             with open(os.path.join(RESULTS_PATH, f"temp_{self.patient_id}.json"), "w", encoding="utf-8") as f:
                 json.dump(partial, f, indent=2, ensure_ascii=False)
-        self.root.quit()
         self.root.destroy()
         sys.exit(0)
 
