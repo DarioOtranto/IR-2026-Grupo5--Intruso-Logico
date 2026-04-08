@@ -23,9 +23,9 @@ Nuestra versión adapta la tarea al **castellano** (variedad argentina/uruguaya)
 ## 👥 Población objetivo
 
 - Pacientes con **ACV en hemisferio izquierdo o derecho** que afecten funciones ejecutivas.
-- Personas con **demencia frontotemporal**, **enfermedad de Alzheimer** o **parkinson** con deterioro cognitivo.
+- Personas con **demencia frontotemporal**, **enfermedad de Alzheimer** o **Parkinson** con deterioro cognitivo.
 - Pacientes con **traumatismo encéfalo craneano** (TEC) que requieran evaluación de razonamiento abstracto.
-- **Sujetos controles** para obtener datos normativos.
+- **Sujetos control** para obtener datos normativos.
 
 El diseño es accesible para personas con **hemiparesia** (uso de una sola mano, botones grandes, sin doble clic) y **trastornos visuales** (alto contraste, imágenes grandes, fuente grande).
 
